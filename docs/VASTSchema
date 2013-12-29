@@ -1,0 +1,110 @@
+VASTAd
+	NSString - AdSystem
+	NSString - Descrition
+	NSString - AdSystem (version)
+	NSString - Description
+	NSString - Advertiser
+	NSString - Pricing (model,currency)
+	NSString - Survey
+	NSArray (NSURL) - Impression (ID)
+	NSArray (NSURL) - Errors
+	VASTCreative (VASTLinearCreative,VASTNonLinearCreative,VASTCompanionAdCreative) 
+
+VASTCreative
+	ID
+	Sequence
+	adID
+	apiFramework
+
+VASTLinearCreative
+	skipoffset
+	duration
+	NSArray (VASTMediaFile) - VASTMediaFilesArray
+	NSDictionary ("EventName"-> NSArray(NSURL)) -  VASTTrackingEvents
+	NSDictionary ("ClickType"-> NSArray(NSURL)) -  VASTVideoClicks
+
+VASTMediaFile
+	id
+	delivery
+	type
+	bitrate
+	minBitrate
+	maxBitrate
+	width
+	height
+	scalable
+	maintainAspectRatio
+	codec
+	apiFramework
+
+VAST
+	Ad
+		Inline
+			AdSystem (version)
+			Description
+			Advertiser
+			Pricing (model,currency)
+			Survey
+			Error
+			Impression (id)
+			Creatives
+				Creative (id,sequence,adID,apiFramework)
+					//CreativeExtensions - skip
+						//CreativeExtension
+					Linear (skipoffset)
+						//AdParameters(xmlEncoded) - skip
+						Duration
+						MediaFiles
+							MediaFile (id,delivery,type,bitrate,minBitrate,maxBitrate,width,height,scalable,maintainAspectRatio,codec,apiFramework)
+						TrackingEvents
+							Tracking (event)
+						VideoClicks
+							ClickThrough (id)
+							ClickTracking (id)
+							CustomClick (id)
+						//Icons
+							//Icon (program,width,height,xPosition,yPosition,duration,offset,apiFramework)
+							//StaticResource (creativeType)
+							//iFrameResource
+							//HTMLResource
+							//IconClicks
+								//IconClickThrough
+								//IconClickTracking (id)
+							//IconViewTracking
+					//CompanionAds (required)
+						//Companion (id,width,height,assetWidth,assetHeight,expandedWidth,expandedHeight,apiFramework,adSlotID)
+							//StaticResource (creativeType)
+							//iFrameResource
+							//HTMLResource
+							//AdParameters (xmlEncoded)
+							//AltText
+							//CompanionClickThrough
+							//CompanionClickTracking (id)
+							//TrackingEvents
+								//Tracking (event)
+					//NonLinearAds
+						//NonLinear (id,width,height,assetWidth,assetHeight,expandedWidth,expandedHeight,apiFramework,adSlotID)
+							//StaticResource (creativeType)
+							//iFrameResource
+							//HTMLResource
+							//NonLinearClickThrough
+							//NonLinearClickTracking (id)
+							//AdParameters (xmlEncoded)
+						//TrackingEvents
+								//Tracking (event)
+			//Extensions
+				//Extension (type)
+		Wrapper
+			AdSystem (version)
+			VastAdTagURI
+			Error
+			Impression (id)
+			Creatives
+				Creative (id,sequence,adID)
+					Linear
+						TrackingEvents
+							Tracking
+						VideoClicks
+							ClickTracking (id)
+							CustomClick (id)
+

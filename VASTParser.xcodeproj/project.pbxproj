@@ -22,6 +22,8 @@
 		7CF11F40187004BC00C1AA14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1F187004BC00C1AA14 /* UIKit.framework */; };
 		7CF11F48187004BC00C1AA14 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CF11F46187004BC00C1AA14 /* InfoPlist.strings */; };
 		7CF11F4A187004BC00C1AA14 /* VASTParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF11F49187004BC00C1AA14 /* VASTParserTests.m */; };
+		7CF11F571870059600C1AA14 /* VASTAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF11F561870059600C1AA14 /* VASTAd.m */; };
+		7CF11F5A187005B500C1AA14 /* VASTParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF11F59187005B400C1AA14 /* VASTParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,10 @@
 		7CF11F45187004BC00C1AA14 /* VASTParserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VASTParserTests-Info.plist"; sourceTree = "<group>"; };
 		7CF11F47187004BC00C1AA14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7CF11F49187004BC00C1AA14 /* VASTParserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VASTParserTests.m; sourceTree = "<group>"; };
+		7CF11F551870059600C1AA14 /* VASTAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASTAd.h; sourceTree = "<group>"; };
+		7CF11F561870059600C1AA14 /* VASTAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASTAd.m; sourceTree = "<group>"; };
+		7CF11F58187005B400C1AA14 /* VASTParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASTParser.h; sourceTree = "<group>"; };
+		7CF11F59187005B400C1AA14 /* VASTParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASTParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,13 +120,8 @@
 		7CF11F21187004BC00C1AA14 /* VASTParser */ = {
 			isa = PBXGroup;
 			children = (
-				7CF11F2A187004BC00C1AA14 /* VASTAppDelegate.h */,
-				7CF11F2B187004BC00C1AA14 /* VASTAppDelegate.m */,
-				7CF11F2D187004BC00C1AA14 /* Main_iPhone.storyboard */,
-				7CF11F30187004BC00C1AA14 /* Main_iPad.storyboard */,
-				7CF11F33187004BC00C1AA14 /* VASTViewController.h */,
-				7CF11F34187004BC00C1AA14 /* VASTViewController.m */,
-				7CF11F36187004BC00C1AA14 /* Images.xcassets */,
+				7CF11F54187004ED00C1AA14 /* app */,
+				7CF11F53187004DE00C1AA14 /* classes */,
 				7CF11F22187004BC00C1AA14 /* Supporting Files */,
 			);
 			path = VASTParser;
@@ -153,6 +154,31 @@
 				7CF11F46187004BC00C1AA14 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CF11F53187004DE00C1AA14 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				7CF11F551870059600C1AA14 /* VASTAd.h */,
+				7CF11F561870059600C1AA14 /* VASTAd.m */,
+				7CF11F58187005B400C1AA14 /* VASTParser.h */,
+				7CF11F59187005B400C1AA14 /* VASTParser.m */,
+			);
+			name = classes;
+			sourceTree = "<group>";
+		};
+		7CF11F54187004ED00C1AA14 /* app */ = {
+			isa = PBXGroup;
+			children = (
+				7CF11F2A187004BC00C1AA14 /* VASTAppDelegate.h */,
+				7CF11F2B187004BC00C1AA14 /* VASTAppDelegate.m */,
+				7CF11F2D187004BC00C1AA14 /* Main_iPhone.storyboard */,
+				7CF11F30187004BC00C1AA14 /* Main_iPad.storyboard */,
+				7CF11F33187004BC00C1AA14 /* VASTViewController.h */,
+				7CF11F34187004BC00C1AA14 /* VASTViewController.m */,
+				7CF11F36187004BC00C1AA14 /* Images.xcassets */,
+			);
+			name = app;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,8 +280,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF11F5A187005B500C1AA14 /* VASTParser.m in Sources */,
 				7CF11F35187004BC00C1AA14 /* VASTViewController.m in Sources */,
 				7CF11F2C187004BC00C1AA14 /* VASTAppDelegate.m in Sources */,
+				7CF11F571870059600C1AA14 /* VASTAd.m in Sources */,
 				7CF11F28187004BC00C1AA14 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
