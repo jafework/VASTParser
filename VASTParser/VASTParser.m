@@ -154,7 +154,23 @@
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
+    [self filterAds];
     [self parserDidFinish:self.ads];
+}
+
+-(void)filterAds{
+    //This is temporary until companion ads and non-linear support is added
+    //This method will filter out all ads except for linear ads
+    
+    for (VASTAd *ad in self.ads) {
+        NSMutableArray *filteredCreatives = [[NSMutableArray alloc] init];
+        for(VASTCreative *creative in ad.VASTCreatives){
+            if([creative isKindOfClass:[VASTLinearCreative class]]){
+                [filteredCreatives addObject:creative];
+            }
+        }
+        ad.VASTCreatives = filteredCreatives;
+    }
 }
 
 #pragma mark - VASTParser Delegate
