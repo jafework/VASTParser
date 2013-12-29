@@ -10,7 +10,7 @@
 
 @protocol VASTParserDelegate <NSObject>
 @required
--(void)parserDidFinish;
+-(void)parserDidFinish:(NSMutableArray*)ads;
 @end
 
 @interface VASTParser : NSObject<VASTParserDelegate>

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C5BD4A818701DE8009AF5E1 /* VASTCreative.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5BD4A718701DE8009AF5E1 /* VASTCreative.m */; };
+		7C5BD4AC18701E88009AF5E1 /* VASTLinearCreative.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5BD4AB18701E88009AF5E1 /* VASTLinearCreative.m */; };
+		7C5BD4AF1870210F009AF5E1 /* VASTMediaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5BD4AE1870210F009AF5E1 /* VASTMediaFile.m */; };
 		7CF11F1C187004BC00C1AA14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1B187004BC00C1AA14 /* Foundation.framework */; };
 		7CF11F1E187004BC00C1AA14 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1D187004BC00C1AA14 /* CoreGraphics.framework */; };
 		7CF11F20187004BC00C1AA14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1F187004BC00C1AA14 /* UIKit.framework */; };
@@ -37,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C5BD4A618701DE8009AF5E1 /* VASTCreative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASTCreative.h; sourceTree = "<group>"; };
+		7C5BD4A718701DE8009AF5E1 /* VASTCreative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASTCreative.m; sourceTree = "<group>"; };
+		7C5BD4AA18701E88009AF5E1 /* VASTLinearCreative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASTLinearCreative.h; sourceTree = "<group>"; };
+		7C5BD4AB18701E88009AF5E1 /* VASTLinearCreative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASTLinearCreative.m; sourceTree = "<group>"; };
+		7C5BD4AD1870210F009AF5E1 /* VASTMediaFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASTMediaFile.h; sourceTree = "<group>"; };
+		7C5BD4AE1870210F009AF5E1 /* VASTMediaFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASTMediaFile.m; sourceTree = "<group>"; };
 		7CF11F18187004BC00C1AA14 /* VASTParser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VASTParser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CF11F1B187004BC00C1AA14 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7CF11F1D187004BC00C1AA14 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -163,6 +172,12 @@
 				7CF11F561870059600C1AA14 /* VASTAd.m */,
 				7CF11F58187005B400C1AA14 /* VASTParser.h */,
 				7CF11F59187005B400C1AA14 /* VASTParser.m */,
+				7C5BD4A618701DE8009AF5E1 /* VASTCreative.h */,
+				7C5BD4A718701DE8009AF5E1 /* VASTCreative.m */,
+				7C5BD4AA18701E88009AF5E1 /* VASTLinearCreative.h */,
+				7C5BD4AB18701E88009AF5E1 /* VASTLinearCreative.m */,
+				7C5BD4AD1870210F009AF5E1 /* VASTMediaFile.h */,
+				7C5BD4AE1870210F009AF5E1 /* VASTMediaFile.m */,
 			);
 			name = classes;
 			sourceTree = "<group>";
@@ -280,9 +295,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C5BD4AF1870210F009AF5E1 /* VASTMediaFile.m in Sources */,
 				7CF11F5A187005B500C1AA14 /* VASTParser.m in Sources */,
 				7CF11F35187004BC00C1AA14 /* VASTViewController.m in Sources */,
+				7C5BD4A818701DE8009AF5E1 /* VASTCreative.m in Sources */,
 				7CF11F2C187004BC00C1AA14 /* VASTAppDelegate.m in Sources */,
+				7C5BD4AC18701E88009AF5E1 /* VASTLinearCreative.m in Sources */,
 				7CF11F571870059600C1AA14 /* VASTAd.m in Sources */,
 				7CF11F28187004BC00C1AA14 /* main.m in Sources */,
 			);
@@ -503,6 +521,7 @@
 				7CF11F4F187004BC00C1AA14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7CF11F50187004BC00C1AA14 /* Build configuration list for PBXNativeTarget "VASTParserTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +530,7 @@
 				7CF11F52187004BC00C1AA14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

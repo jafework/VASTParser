@@ -10,7 +10,7 @@
 #import "VASTParser.h"
 
 @interface VASTViewController ()<VASTParserDelegate>
-
+@property (nonatomic, strong) VASTParser *parser;
 @end
 
 @implementation VASTViewController
@@ -21,9 +21,14 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     NSURL *url = [NSURL URLWithString:@"http://demo.tremorvideo.com/proddev/vast/vast_inline_linear.xml"];
-    VASTParser *parser = [[VASTParser alloc] initWithVASTUrl:url];
-    parser.delegate = self;
-    [parser start];
+    self.parser = [[VASTParser alloc] initWithVASTUrl:url];
+    self.parser.delegate = self;
+    [self.parser start];
+}
+
+-(void)parserDidFinish:(NSMutableArray*)ads{
+    NSLog(@"Parser Finished");
+    
 }
 
 - (void)didReceiveMemoryWarning
