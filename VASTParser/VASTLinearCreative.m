@@ -39,4 +39,11 @@
     return _VASTVideoClicks;
 }
 
+-(NSArray*)VASTMediaFiles{
+    if(_VASTMediaFiles == nil){
+        _VASTMediaFiles = [[NSArray alloc] init];
+    }
+    return _VASTMediaFiles;
+}
+
 @end

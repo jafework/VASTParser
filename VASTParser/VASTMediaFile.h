@@ -22,5 +22,6 @@
 @property (nonatomic, strong) NSString *maintainAspectRatio;
 @property (nonatomic, strong) NSString *codec;
 @property (nonatomic, strong) NSString *apiFramework;
+@property (nonatomic, strong) NSURL *url;
 
 @end

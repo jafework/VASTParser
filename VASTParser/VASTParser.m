@@ -10,6 +10,7 @@
 #import "VASTAd.h"
 #import "VASTCreative.h"
 #import "VASTLinearCreative.h"
+#import "VASTMediaFile.h"
 
 @interface VASTParser ()<NSXMLParserDelegate>
 
@@ -63,20 +64,37 @@
         newAd.adID = attributeDict[@"id"];
         [self.ads addObject:newAd];
     }
-     else if ([elementName isEqualToString:@"Creative"]){
+    
+    else if ([elementName isEqualToString:@"Creative"]){
         VASTCreative *newCreative = [[VASTCreative alloc] init];
         newCreative.creativeID = attributeDict[@"AdID"];
         currentAd.VASTCreatives = [currentAd.VASTCreatives arrayByAddingObject:newCreative];
         
         // Todo Append other attributes
     }
+    
     else if ([elementName isEqualToString:@"Linear"]){
         VASTLinearCreative *newLinearCreative = [[VASTLinearCreative alloc] initWithVASTCreative:[currentAd.VASTCreatives lastObject]];
         
         currentAd.VASTCreatives = [[currentAd.VASTCreatives objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, currentAd.VASTCreatives.count-1) ]] arrayByAddingObject:newLinearCreative];
     }
+    
     else if ([elementName isEqualToString:@"Tracking"]){
        self.trackingEvent = attributeDict[@"event"];
+    }
+    
+    else if ([elementName isEqualToString:@"MediaFile"]){
+        VASTMediaFile *newMediaFile = [[VASTMediaFile alloc] init];
+        newMediaFile.delivery = attributeDict[@"delivery"];
+        newMediaFile.type = attributeDict[@"type"];
+        newMediaFile.bitrate = attributeDict[@"bitrate"];
+        newMediaFile.width = attributeDict[@"width"];
+        newMediaFile.height = attributeDict[@"height"];
+        newMediaFile.scalable = attributeDict[@"scalable"];
+        newMediaFile.maintainAspectRatio = attributeDict[@"maintainAspectRatio"];
+        
+        VASTLinearCreative *currentLinearCreative = [currentAd.VASTCreatives lastObject];
+        currentLinearCreative.VASTMediaFiles = [currentLinearCreative.VASTMediaFiles arrayByAddingObject:newMediaFile];
     }
 }
 
@@ -125,6 +143,11 @@
         
         else if ([elementName isEqualToString:@"ClickThrough"] || [elementName isEqualToString:@"ClickTracking"] || [elementName isEqualToString:@"CustomClick"]){
             [currentLinearCreative.VASTVideoClicks[elementName] addObject:[NSURL URLWithString:[self.node copy]]];
+        }
+        
+        else if ([elementName isEqualToString:@"MediaFile"]){
+            VASTMediaFile *currentMediaFile = [currentLinearCreative.VASTMediaFiles lastObject];
+            currentMediaFile.url = [NSURL URLWithString:[self.node copy]];
         }
     }
     

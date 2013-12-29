@@ -18,5 +18,7 @@
 	//NSDictionary ("EventName"-> NSArray(NSURL)) -  VASTTrackingEvents
 @property (nonatomic, strong) NSDictionary *VASTVideoClicks;
 	//NSDictionary ("ClickType"-> NSArray(NSURL)) -  VASTVideoClicks
+@property (nonatomic, strong) NSArray *VASTMediaFiles;
+    //of VASTMediaFile
 -(id)initWithVASTCreative:(VASTCreative*)creative;
 @end
