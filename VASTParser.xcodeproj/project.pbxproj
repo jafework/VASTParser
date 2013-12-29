@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7CF11F1C187004BC00C1AA14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1B187004BC00C1AA14 /* Foundation.framework */; };
+		7CF11F1E187004BC00C1AA14 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1D187004BC00C1AA14 /* CoreGraphics.framework */; };
+		7CF11F20187004BC00C1AA14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1F187004BC00C1AA14 /* UIKit.framework */; };
+		7CF11F26187004BC00C1AA14 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CF11F24187004BC00C1AA14 /* InfoPlist.strings */; };
+		7CF11F28187004BC00C1AA14 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF11F27187004BC00C1AA14 /* main.m */; };
+		7CF11F2C187004BC00C1AA14 /* VASTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF11F2B187004BC00C1AA14 /* VASTAppDelegate.m */; };
+		7CF11F2F187004BC00C1AA14 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CF11F2D187004BC00C1AA14 /* Main_iPhone.storyboard */; };
+		7CF11F32187004BC00C1AA14 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CF11F30187004BC00C1AA14 /* Main_iPad.storyboard */; };
+		7CF11F35187004BC00C1AA14 /* VASTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF11F34187004BC00C1AA14 /* VASTViewController.m */; };
+		7CF11F37187004BC00C1AA14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CF11F36187004BC00C1AA14 /* Images.xcassets */; };
+		7CF11F3E187004BC00C1AA14 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F3D187004BC00C1AA14 /* XCTest.framework */; };
+		7CF11F3F187004BC00C1AA14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1B187004BC00C1AA14 /* Foundation.framework */; };
+		7CF11F40187004BC00C1AA14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF11F1F187004BC00C1AA14 /* UIKit.framework */; };
+		7CF11F48187004BC00C1AA14 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CF11F46187004BC00C1AA14 /* InfoPlist.strings */; };
+		7CF11F4A187004BC00C1AA14 /* VASTParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF11F49187004BC00C1AA14 /* VASTParserTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7CF11F41187004BC00C1AA14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7CF11F10187004BC00C1AA14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7CF11F17187004BC00C1AA14;
+			remoteInfo = VASTParser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7CF11F18187004BC00C1AA14 /* VASTParser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VASTParser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CF11F1B187004BC00C1AA14 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7CF11F1D187004BC00C1AA14 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7CF11F1F187004BC00C1AA14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7CF11F23187004BC00C1AA14 /* VASTParser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VASTParser-Info.plist"; sourceTree = "<group>"; };
+		7CF11F25187004BC00C1AA14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7CF11F27187004BC00C1AA14 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7CF11F29187004BC00C1AA14 /* VASTParser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VASTParser-Prefix.pch"; sourceTree = "<group>"; };
+		7CF11F2A187004BC00C1AA14 /* VASTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VASTAppDelegate.h; sourceTree = "<group>"; };
+		7CF11F2B187004BC00C1AA14 /* VASTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VASTAppDelegate.m; sourceTree = "<group>"; };
+		7CF11F2E187004BC00C1AA14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		7CF11F31187004BC00C1AA14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		7CF11F33187004BC00C1AA14 /* VASTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VASTViewController.h; sourceTree = "<group>"; };
+		7CF11F34187004BC00C1AA14 /* VASTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VASTViewController.m; sourceTree = "<group>"; };
+		7CF11F36187004BC00C1AA14 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7CF11F3C187004BC00C1AA14 /* VASTParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VASTParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CF11F3D187004BC00C1AA14 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7CF11F45187004BC00C1AA14 /* VASTParserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VASTParserTests-Info.plist"; sourceTree = "<group>"; };
+		7CF11F47187004BC00C1AA14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7CF11F49187004BC00C1AA14 /* VASTParserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VASTParserTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7CF11F15187004BC00C1AA14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CF11F1E187004BC00C1AA14 /* CoreGraphics.framework in Frameworks */,
+				7CF11F20187004BC00C1AA14 /* UIKit.framework in Frameworks */,
+				7CF11F1C187004BC00C1AA14 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CF11F39187004BC00C1AA14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CF11F3E187004BC00C1AA14 /* XCTest.framework in Frameworks */,
+				7CF11F40187004BC00C1AA14 /* UIKit.framework in Frameworks */,
+				7CF11F3F187004BC00C1AA14 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7CF11F0F187004BC00C1AA14 = {
+			isa = PBXGroup;
+			children = (
+				7CF11F21187004BC00C1AA14 /* VASTParser */,
+				7CF11F43187004BC00C1AA14 /* VASTParserTests */,
+				7CF11F1A187004BC00C1AA14 /* Frameworks */,
+				7CF11F19187004BC00C1AA14 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7CF11F19187004BC00C1AA14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7CF11F18187004BC00C1AA14 /* VASTParser.app */,
+				7CF11F3C187004BC00C1AA14 /* VASTParserTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7CF11F1A187004BC00C1AA14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7CF11F1B187004BC00C1AA14 /* Foundation.framework */,
+				7CF11F1D187004BC00C1AA14 /* CoreGraphics.framework */,
+				7CF11F1F187004BC00C1AA14 /* UIKit.framework */,
+				7CF11F3D187004BC00C1AA14 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7CF11F21187004BC00C1AA14 /* VASTParser */ = {
+			isa = PBXGroup;
+			children = (
+				7CF11F2A187004BC00C1AA14 /* VASTAppDelegate.h */,
+				7CF11F2B187004BC00C1AA14 /* VASTAppDelegate.m */,
+				7CF11F2D187004BC00C1AA14 /* Main_iPhone.storyboard */,
+				7CF11F30187004BC00C1AA14 /* Main_iPad.storyboard */,
+				7CF11F33187004BC00C1AA14 /* VASTViewController.h */,
+				7CF11F34187004BC00C1AA14 /* VASTViewController.m */,
+				7CF11F36187004BC00C1AA14 /* Images.xcassets */,
+				7CF11F22187004BC00C1AA14 /* Supporting Files */,
+			);
+			path = VASTParser;
+			sourceTree = "<group>";
+		};
+		7CF11F22187004BC00C1AA14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CF11F23187004BC00C1AA14 /* VASTParser-Info.plist */,
+				7CF11F24187004BC00C1AA14 /* InfoPlist.strings */,
+				7CF11F27187004BC00C1AA14 /* main.m */,
+				7CF11F29187004BC00C1AA14 /* VASTParser-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CF11F43187004BC00C1AA14 /* VASTParserTests */ = {
+			isa = PBXGroup;
+			children = (
+				7CF11F49187004BC00C1AA14 /* VASTParserTests.m */,
+				7CF11F44187004BC00C1AA14 /* Supporting Files */,
+			);
+			path = VASTParserTests;
+			sourceTree = "<group>";
+		};
+		7CF11F44187004BC00C1AA14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CF11F45187004BC00C1AA14 /* VASTParserTests-Info.plist */,
+				7CF11F46187004BC00C1AA14 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7CF11F17187004BC00C1AA14 /* VASTParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CF11F4D187004BC00C1AA14 /* Build configuration list for PBXNativeTarget "VASTParser" */;
+			buildPhases = (
+				7CF11F14187004BC00C1AA14 /* Sources */,
+				7CF11F15187004BC00C1AA14 /* Frameworks */,
+				7CF11F16187004BC00C1AA14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VASTParser;
+			productName = VASTParser;
+			productReference = 7CF11F18187004BC00C1AA14 /* VASTParser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7CF11F3B187004BC00C1AA14 /* VASTParserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CF11F50187004BC00C1AA14 /* Build configuration list for PBXNativeTarget "VASTParserTests" */;
+			buildPhases = (
+				7CF11F38187004BC00C1AA14 /* Sources */,
+				7CF11F39187004BC00C1AA14 /* Frameworks */,
+				7CF11F3A187004BC00C1AA14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7CF11F42187004BC00C1AA14 /* PBXTargetDependency */,
+			);
+			name = VASTParserTests;
+			productName = VASTParserTests;
+			productReference = 7CF11F3C187004BC00C1AA14 /* VASTParserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7CF11F10187004BC00C1AA14 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = VAST;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Joseph Afework";
+				TargetAttributes = {
+					7CF11F3B187004BC00C1AA14 = {
+						TestTargetID = 7CF11F17187004BC00C1AA14;
+					};
+				};
+			};
+			buildConfigurationList = 7CF11F13187004BC00C1AA14 /* Build configuration list for PBXProject "VASTParser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7CF11F0F187004BC00C1AA14;
+			productRefGroup = 7CF11F19187004BC00C1AA14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7CF11F17187004BC00C1AA14 /* VASTParser */,
+				7CF11F3B187004BC00C1AA14 /* VASTParserTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7CF11F16187004BC00C1AA14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CF11F32187004BC00C1AA14 /* Main_iPad.storyboard in Resources */,
+				7CF11F37187004BC00C1AA14 /* Images.xcassets in Resources */,
+				7CF11F2F187004BC00C1AA14 /* Main_iPhone.storyboard in Resources */,
+				7CF11F26187004BC00C1AA14 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CF11F3A187004BC00C1AA14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CF11F48187004BC00C1AA14 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7CF11F14187004BC00C1AA14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CF11F35187004BC00C1AA14 /* VASTViewController.m in Sources */,
+				7CF11F2C187004BC00C1AA14 /* VASTAppDelegate.m in Sources */,
+				7CF11F28187004BC00C1AA14 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CF11F38187004BC00C1AA14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CF11F4A187004BC00C1AA14 /* VASTParserTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7CF11F42187004BC00C1AA14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7CF11F17187004BC00C1AA14 /* VASTParser */;
+			targetProxy = 7CF11F41187004BC00C1AA14 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7CF11F24187004BC00C1AA14 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CF11F25187004BC00C1AA14 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7CF11F2D187004BC00C1AA14 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CF11F2E187004BC00C1AA14 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		7CF11F30187004BC00C1AA14 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CF11F31187004BC00C1AA14 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		7CF11F46187004BC00C1AA14 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CF11F47187004BC00C1AA14 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7CF11F4B187004BC00C1AA14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7CF11F4C187004BC00C1AA14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7CF11F4E187004BC00C1AA14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VASTParser/VASTParser-Prefix.pch";
+				INFOPLIST_FILE = "VASTParser/VASTParser-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7CF11F4F187004BC00C1AA14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VASTParser/VASTParser-Prefix.pch";
+				INFOPLIST_FILE = "VASTParser/VASTParser-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		7CF11F51187004BC00C1AA14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VASTParser.app/VASTParser";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VASTParser/VASTParser-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "VASTParserTests/VASTParserTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		7CF11F52187004BC00C1AA14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VASTParser.app/VASTParser";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VASTParser/VASTParser-Prefix.pch";
+				INFOPLIST_FILE = "VASTParserTests/VASTParserTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CF11F13187004BC00C1AA14 /* Build configuration list for PBXProject "VASTParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CF11F4B187004BC00C1AA14 /* Debug */,
+				7CF11F4C187004BC00C1AA14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CF11F4D187004BC00C1AA14 /* Build configuration list for PBXNativeTarget "VASTParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CF11F4E187004BC00C1AA14 /* Debug */,
+				7CF11F4F187004BC00C1AA14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7CF11F50187004BC00C1AA14 /* Build configuration list for PBXNativeTarget "VASTParserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CF11F51187004BC00C1AA14 /* Debug */,
+				7CF11F52187004BC00C1AA14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7CF11F10187004BC00C1AA14 /* Project object */;
+}
