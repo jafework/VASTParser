@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSMutableString *node;
 @property (nonatomic, strong) NSMutableArray *ads;
 @property (nonatomic, strong) NSString *trackingEvent;
+@property (nonatomic, strong) VASTAd *wrapper;
 @end
 
 @implementation VASTParser
@@ -33,6 +34,16 @@
     return self;
 }
 
+-(id)initWithVASTAd:(VASTAd *)wrapper{
+    self = [super init];
+    if(self){
+        self.parser = [[NSXMLParser alloc] initWithContentsOfURL:wrapper.adTagURL];
+        self.parser.delegate = self;
+        self.wrapper = wrapper;
+    }
+    return self;
+}
+
 #pragma mark - Lazy Load Instance Variables
 -(NSMutableArray *)ads{
     if(_ads == nil){
@@ -43,9 +54,15 @@
 
 #pragma mark - Parser Methods
 -(void)start{
-    [self.queue addOperationWithBlock:^{
+    if(self.wrapper == nil){
+        [self.queue addOperationWithBlock:^{
+            [self.parser parse];
+        }];
+    }
+    else{
+        //Only Used when expanding Wrappers, (Thread is already backgrounded)
         [self.parser parse];
-    }];
+    }
 }
 
 -(void)abort{
@@ -77,6 +94,15 @@
         VASTLinearCreative *newLinearCreative = [[VASTLinearCreative alloc] initWithVASTCreative:[currentAd.VASTCreatives lastObject]];
         
         currentAd.VASTCreatives = [[currentAd.VASTCreatives objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, currentAd.VASTCreatives.count-1) ]] arrayByAddingObject:newLinearCreative];
+    }
+    
+    else if([elementName isEqualToString:@"InLine"]){
+        currentAd.isWrapper = NO;
+        currentAd.adTagURL = nil;
+    }
+    
+    else if ([elementName isEqualToString:@"Wrapper"]){
+        currentAd.isWrapper = YES;
     }
     
     else if ([elementName isEqualToString:@"Tracking"]){
@@ -118,13 +144,18 @@
         currentAd.description = [self.node copy];
     }
     else if ([elementName isEqualToString:@"Error"]){
-        currentAd.Errors = [currentAd.Errors arrayByAddingObject:[NSURL URLWithString:[self.node copy]]];
+        currentAd.Errors = [currentAd.Errors arrayByAddingObject:[NSURL URLWithString:[[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
+        
     }
     else if ([elementName isEqualToString:@"Impression"]){
-        currentAd.Impressions = [currentAd.Impressions arrayByAddingObject:[NSURL URLWithString:[self.node copy]]];
+        currentAd.Impressions = [currentAd.Impressions arrayByAddingObject:[NSURL URLWithString:[[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
     }
     
-    if([[currentAd.VASTCreatives lastObject] isKindOfClass:[VASTLinearCreative class]]){
+    else if ([elementName isEqualToString:@"VASTAdTagURI"]){
+        currentAd.adTagURL = [NSURL URLWithString:[self.node copy]];
+    }
+    
+    if([[currentAd.VASTCreatives lastObject] isKindOfClass:[VASTLinearCreative class]] && currentAd.isWrapper == NO){
     
         VASTLinearCreative *currentLinearCreative = [currentAd.VASTCreatives lastObject];
             
@@ -138,24 +169,64 @@
                 [currentLinearCreative.VASTTrackingEvents setObject:[[NSMutableArray alloc] init] forKey:self.trackingEvent];
             }
             
-            [currentLinearCreative.VASTTrackingEvents[self.trackingEvent] addObject:[NSURL URLWithString:[self.node copy]]];
+            [currentLinearCreative.VASTTrackingEvents[self.trackingEvent] addObject:[NSURL URLWithString:[[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
         }
         
         else if ([elementName isEqualToString:@"ClickThrough"] || [elementName isEqualToString:@"ClickTracking"] || [elementName isEqualToString:@"CustomClick"]){
-            [currentLinearCreative.VASTVideoClicks[elementName] addObject:[NSURL URLWithString:[self.node copy]]];
+            [currentLinearCreative.VASTVideoClicks[elementName] addObject:[NSURL URLWithString:[[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
         }
         
         else if ([elementName isEqualToString:@"MediaFile"]){
             VASTMediaFile *currentMediaFile = [currentLinearCreative.VASTMediaFiles lastObject];
-            currentMediaFile.url = [NSURL URLWithString:[self.node copy]];
+            currentMediaFile.url = [NSURL URLWithString:[[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
         }
     }
     
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
-    [self filterAds];
-    [self parserDidFinish:self.ads];
+    
+    if(self.wrapper){
+        //self.ads contains the result behind the wrapper need to merge the wrapper results into self.ads
+        [self mergeAds];
+        [self.delegate wrapperDidFinish:self.ads];
+    }
+    else{
+        [self followWrappers];
+    }
+}
+
+-(void)mergeAds{
+    // Merge the wrapper and self.ads data here
+    
+    for(VASTAd *ad in self.ads){
+        ad.Impressions = [ad.Impressions arrayByAddingObjectsFromArray:self.wrapper.Impressions];
+        ad.Errors = [ad.Errors arrayByAddingObjectsFromArray:self.wrapper.Errors];
+    }
+    
+}
+
+-(void)followWrappers{
+    
+    for(VASTAd *ad in self.ads){
+        if(ad.isWrapper == YES){
+            self.wrapper = ad;
+            break;
+        }
+        else{
+            self.wrapper = nil;
+        }
+    }
+    
+    if(self.wrapper == nil){
+        [self filterAds];
+        [self parserDidFinish:self.ads];
+    }
+    else{
+        VASTParser *wrapperParser = [[VASTParser alloc] initWithVASTAd:self.wrapper];
+        wrapperParser.delegate = self;
+        [wrapperParser start];
+    }
 }
 
 -(void)filterAds{
@@ -187,6 +258,13 @@
             [self.delegate parserDidFinish:ads];
         }
     }
+}
+
+-(void)wrapperDidFinish:(NSMutableArray*)ads{
+    [self.ads removeObject:self.wrapper];
+    self.wrapper = nil;
+    [self.ads addObjectsFromArray:ads];
+    [self followWrappers];
 }
 
 @end

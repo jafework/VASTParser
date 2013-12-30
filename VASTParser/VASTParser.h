@@ -11,6 +11,8 @@
 @protocol VASTParserDelegate <NSObject>
 @required
 -(void)parserDidFinish:(NSMutableArray*)ads;
+@optional
+-(void)wrapperDidFinish:(NSMutableArray*)ads;
 @end
 
 @interface VASTParser : NSObject<VASTParserDelegate>

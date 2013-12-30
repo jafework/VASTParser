@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface VASTAd : NSObject
-
+@property (nonatomic) BOOL isWrapper;
+@property (nonatomic, strong) NSURL *adTagURL;
 @property (nonatomic, strong) NSString *adID;
 @property (nonatomic, strong) NSString *adSystem;
 @property (nonatomic, strong) NSString *adTitle;
