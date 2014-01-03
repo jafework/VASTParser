@@ -79,6 +79,7 @@
     if([elementName isEqualToString:@"Ad"]){
         VASTAd *newAd = [[VASTAd alloc] init];
         newAd.adID = attributeDict[@"id"];
+        newAd.sequence = [NSNumber numberWithInteger:[attributeDict[@"sequence"] integerValue]];
         [self.ads addObject:newAd];
     }
     
@@ -189,9 +190,11 @@
     if(self.wrapper){
         //self.ads contains the result behind the wrapper need to merge the wrapper results into self.ads
         [self mergeAds];
+        [self sortAds];
         [self.delegate wrapperDidFinish:self.ads];
     }
     else{
+        [self sortAds];
         [self followWrappers];
     }
 }
@@ -204,6 +207,12 @@
         ad.Errors = [ad.Errors arrayByAddingObjectsFromArray:self.wrapper.Errors];
     }
     
+}
+
+-(void)sortAds{
+    [self.ads sortUsingComparator:^NSComparisonResult(VASTAd *obj1, VASTAd *obj2) {
+        return [obj1.sequence compare:obj2.sequence];
+    }];
 }
 
 -(void)followWrappers{
@@ -254,6 +263,7 @@
         }];
     }
     else{
+    
         if([self.delegate respondsToSelector:@selector(parserDidFinish:)]){
             [self.delegate parserDidFinish:ads];
         }
@@ -261,9 +271,15 @@
 }
 
 -(void)wrapperDidFinish:(NSMutableArray*)ads{
+    int index = [self.ads indexOfObject:self.wrapper];
     [self.ads removeObject:self.wrapper];
+    //Set the sequence ID to match the wrapper nodes
+    for (VASTAd *ad in ads) {
+        ad.sequence = [self.wrapper.sequence copy];
+        [self.ads insertObject:ad atIndex:index];
+        index++;
+    }
     self.wrapper = nil;
-    [self.ads addObjectsFromArray:ads];
     [self followWrappers];
 }
 
