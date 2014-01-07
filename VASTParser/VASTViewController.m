@@ -9,6 +9,7 @@
 #import "VASTViewController.h"
 #import "VASTParser.h"
 
+
 @interface VASTViewController ()<VASTParserDelegate>
 @property (nonatomic, strong) VASTParser *parser;
 @end
@@ -20,8 +21,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    NSURL *url = [NSURL URLWithString:@"http://share.onescreen.co/homes/slee/fishy.xml"];
+    
     //NSURL *url = [NSURL URLWithString:@"http://demo.tremorvideo.com/proddev/vast/vast_inline_linear.xml"];
-    NSURL *url = [NSURL URLWithString:@"http://share.onescreen.co/homes/jafework/bac/2-0_tests/VAST_3_test_wrapper_multi.xml"];
+    //NSURL *url = [NSURL URLWithString:@"http://share.onescreen.co/homes/jafework/bac/2-0_tests/VAST_3_test_wrapper_multi.xml"];
     self.parser = [[VASTParser alloc] initWithVASTUrl:url];
     self.parser.delegate = self;
     [self.parser start];

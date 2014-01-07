@@ -12,8 +12,6 @@
 
 @property (nonatomic, strong) NSString *skipOffset;
 @property (nonatomic, strong) NSString *duration;
-@property (nonatomic, strong) NSArray *VASTMediaFilesArray;
-    // of VASTMediaFile
 @property (nonatomic, strong) NSMutableDictionary *VASTTrackingEvents;
 	//NSDictionary ("EventName"-> NSArray(NSURL)) -  VASTTrackingEvents
 @property (nonatomic, strong) NSDictionary *VASTVideoClicks;

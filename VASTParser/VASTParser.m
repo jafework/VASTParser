@@ -7,10 +7,12 @@
 //
 
 #import "VASTParser.h"
-#import "VASTAd.h"
 #import "VASTCreative.h"
 #import "VASTLinearCreative.h"
 #import "VASTMediaFile.h"
+#import "VASTAdPod.h"
+#import "VASTInLineAdPod.h"
+#import "VASTWrapperAdPod.h"
 
 @interface VASTParser ()<NSXMLParserDelegate>
 
@@ -19,22 +21,24 @@
 @property (nonatomic, strong) NSMutableString *node;
 @property (nonatomic, strong) NSMutableArray *ads;
 @property (nonatomic, strong) NSString *trackingEvent;
-@property (nonatomic, strong) VASTAd *wrapper;
+@property (nonatomic, strong) VASTWrapperAdPod *wrapper;
 @end
 
 @implementation VASTParser
-#pragma mark - Init Methods
+#pragma mark - Init Methods (Public)
 -(id)initWithVASTUrl:(NSURL*)url{
     self = [super init];
     if(self){
         self.queue = [[NSOperationQueue alloc] init];
         self.parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
         self.parser.delegate = self;
+        self.wrapper = nil;
     }
     return self;
 }
 
--(id)initWithVASTAd:(VASTAd *)wrapper{
+#pragma mark - Init Methods (Private)
+-(id)initWithVASTWrapperAdPod:(VASTWrapperAdPod *)wrapper{
     self = [super init];
     if(self){
         self.parser = [[NSXMLParser alloc] initWithContentsOfURL:wrapper.adTagURL];
@@ -52,7 +56,7 @@
     return _ads;
 }
 
-#pragma mark - Parser Methods
+#pragma mark - Parser Methods (Public)
 -(void)start{
     if(self.wrapper == nil){
         [self.queue addOperationWithBlock:^{
@@ -60,24 +64,79 @@
         }];
     }
     else{
-        //Only Used when expanding Wrappers, (Thread is already backgrounded)
+        //Only Used when expanding Wrappers, (Task is already backgrounded)
         [self.parser parse];
     }
 }
 
--(void)abort{
+#pragma mark - Parser Methods (Private)
+
+-(void)mergeAds{
+    // Merge the wrapper and self.ads data here
     
+    for(VASTAdPod *ad in self.ads){
+        [ad.Impressions addObjectsFromArray:self.wrapper.Impressions];
+        [ad.Errors addObjectsFromArray:self.wrapper.Errors];
+    }
+    
+}
+
+-(void)sortAds{
+    [self.ads sortUsingComparator:^NSComparisonResult(VASTAdPod *ad1, VASTAdPod *ad2) {
+        return [ad1.sequence compare:ad2.sequence];
+    }];
+}
+
+-(void)followWrappers{
+    
+    for(VASTAdPod *ad in self.ads){
+        if([ad isKindOfClass:[VASTWrapperAdPod class]] == YES){
+            self.wrapper = (VASTWrapperAdPod*)ad;
+            break;
+        }
+        else{
+            self.wrapper = nil;
+        }
+    }
+    
+    if(self.wrapper == nil){
+        //All Wrappers have been parsed
+        [self filterAds];
+        [self parserDidFinish:self.ads];
+    }
+    else{
+        VASTParser *wrapperParser = [[VASTParser alloc] initWithVASTWrapperAdPod:self.wrapper];
+        wrapperParser.delegate = self;
+        [wrapperParser start];
+    }
+}
+
+-(void)filterAds{
+    //This is temporary until companion ads and non-linear support is added
+    //This method will filter out all ads except for linear ads
+    
+    for (VASTAdPod *ad in self.ads) {
+        NSMutableArray *filteredCreatives = [[NSMutableArray alloc] init];
+        for(VASTCreative *creative in ad.VASTCreatives){
+            if([creative isKindOfClass:[VASTLinearCreative class]]){
+                [filteredCreatives addObject:creative];
+            }
+        }
+        ad.VASTCreatives = filteredCreatives;
+    }
 }
 
 #pragma mark - NSXMLParser Delegate
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
+    
     //Reset node string
     self.node = [[NSMutableString alloc] initWithString:@""];
     NSLog(@"Found: %@", elementName);
-    VASTAd *currentAd = [self.ads lastObject];
+    
+    VASTAdPod *currentAd = [self.ads lastObject];
     
     if([elementName isEqualToString:@"Ad"]){
-        VASTAd *newAd = [[VASTAd alloc] init];
+        VASTAdPod *newAd = [[VASTAdPod alloc] init];
         newAd.adID = attributeDict[@"id"];
         newAd.sequence = [NSNumber numberWithInteger:[attributeDict[@"sequence"] integerValue]];
         [self.ads addObject:newAd];
@@ -86,24 +145,25 @@
     else if ([elementName isEqualToString:@"Creative"]){
         VASTCreative *newCreative = [[VASTCreative alloc] init];
         newCreative.creativeID = attributeDict[@"AdID"];
-        currentAd.VASTCreatives = [currentAd.VASTCreatives arrayByAddingObject:newCreative];
-        
-        // Todo Append other attributes
+        [currentAd.VASTCreatives addObject:newCreative];
+        //TODO Append other attributes
     }
     
     else if ([elementName isEqualToString:@"Linear"]){
         VASTLinearCreative *newLinearCreative = [[VASTLinearCreative alloc] initWithVASTCreative:[currentAd.VASTCreatives lastObject]];
-        
-        currentAd.VASTCreatives = [[currentAd.VASTCreatives objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, currentAd.VASTCreatives.count-1) ]] arrayByAddingObject:newLinearCreative];
+        [currentAd.VASTCreatives addObject:newLinearCreative];
     }
     
     else if([elementName isEqualToString:@"InLine"]){
-        currentAd.isWrapper = NO;
-        currentAd.adTagURL = nil;
+        [self.ads removeLastObject];
+        currentAd = [[VASTInLineAdPod alloc] initWithVASTAdPod:currentAd];
+        [self.ads addObject:currentAd];
     }
     
     else if ([elementName isEqualToString:@"Wrapper"]){
-        currentAd.isWrapper = YES;
+        [self.ads removeLastObject];
+        currentAd = [[VASTWrapperAdPod alloc] initWithVASTAdPod:currentAd];
+        [self.ads addObject:currentAd];
     }
     
     else if ([elementName isEqualToString:@"Tracking"]){
@@ -130,33 +190,36 @@
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-    VASTAd *currentAd = [self.ads lastObject];
+    VASTAdPod *currentAd = [self.ads lastObject];
     
     if([elementName isEqualToString:@"AdSystem"]){
         currentAd.adSystem = [self.node copy];
     }
     else if ([elementName isEqualToString:@"AdTitle"]){
-        currentAd.adTitle = [self.node copy];
+        ((VASTInLineAdPod*)currentAd).adTitle = [self.node copy];
     }
     else if ([elementName isEqualToString:@"Description"]){
-        currentAd.description = [self.node copy];
+        ((VASTInLineAdPod*)currentAd).description = [self.node copy];
     }
     else if ([elementName isEqualToString:@"Survey"]){
-        currentAd.description = [self.node copy];
+        // TODO
     }
     else if ([elementName isEqualToString:@"Error"]){
-        currentAd.Errors = [currentAd.Errors arrayByAddingObject:[NSURL URLWithString:[[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
+        NSString *url = [[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet] ];
+        [currentAd.Errors addObject:[NSURL URLWithString:url]];
         
     }
     else if ([elementName isEqualToString:@"Impression"]){
-        currentAd.Impressions = [currentAd.Impressions arrayByAddingObject:[NSURL URLWithString:[[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
+        NSString *url = [[self.node copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet] ];
+        
+        [currentAd.Impressions addObject:[NSURL URLWithString:url]];
     }
     
     else if ([elementName isEqualToString:@"VASTAdTagURI"]){
-        currentAd.adTagURL = [NSURL URLWithString:[self.node copy]];
+        ((VASTWrapperAdPod*)currentAd).adTagURL = [NSURL URLWithString:[self.node copy]];
     }
     
-    if([[currentAd.VASTCreatives lastObject] isKindOfClass:[VASTLinearCreative class]] && currentAd.isWrapper == NO){
+    if([[currentAd.VASTCreatives lastObject] isKindOfClass:[VASTLinearCreative class]] && [currentAd isKindOfClass:[VASTWrapperAdPod class]] == NO){
     
         VASTLinearCreative *currentLinearCreative = [currentAd.VASTCreatives lastObject];
             
@@ -191,7 +254,9 @@
         //self.ads contains the result behind the wrapper need to merge the wrapper results into self.ads
         [self mergeAds];
         [self sortAds];
-        [self.delegate wrapperDidFinish:self.ads];
+        
+        //should check to make sure delegate is a type of VASTParser before calling
+        [(VASTParser*)self.delegate wrapperDidFinish:self.ads];
     }
     else{
         [self sortAds];
@@ -199,82 +264,23 @@
     }
 }
 
--(void)mergeAds{
-    // Merge the wrapper and self.ads data here
-    
-    for(VASTAd *ad in self.ads){
-        ad.Impressions = [ad.Impressions arrayByAddingObjectsFromArray:self.wrapper.Impressions];
-        ad.Errors = [ad.Errors arrayByAddingObjectsFromArray:self.wrapper.Errors];
-    }
-    
-}
-
--(void)sortAds{
-    [self.ads sortUsingComparator:^NSComparisonResult(VASTAd *obj1, VASTAd *obj2) {
-        return [obj1.sequence compare:obj2.sequence];
-    }];
-}
-
--(void)followWrappers{
-    
-    for(VASTAd *ad in self.ads){
-        if(ad.isWrapper == YES){
-            self.wrapper = ad;
-            break;
-        }
-        else{
-            self.wrapper = nil;
-        }
-    }
-    
-    if(self.wrapper == nil){
-        [self filterAds];
-        [self parserDidFinish:self.ads];
-    }
-    else{
-        VASTParser *wrapperParser = [[VASTParser alloc] initWithVASTAd:self.wrapper];
-        wrapperParser.delegate = self;
-        [wrapperParser start];
-    }
-}
-
--(void)filterAds{
-    //This is temporary until companion ads and non-linear support is added
-    //This method will filter out all ads except for linear ads
-    
-    for (VASTAd *ad in self.ads) {
-        NSMutableArray *filteredCreatives = [[NSMutableArray alloc] init];
-        for(VASTCreative *creative in ad.VASTCreatives){
-            if([creative isKindOfClass:[VASTLinearCreative class]]){
-                [filteredCreatives addObject:creative];
-            }
-        }
-        ad.VASTCreatives = filteredCreatives;
-    }
-}
-
 #pragma mark - VASTParser Delegate
 -(void)parserDidFinish:(NSMutableArray*)ads{
     if([NSThread isMainThread] == NO){
-        NSLog(@"Not on main queue, dispatching now");
+        NSLog(@"Not on main thread, dispatching now");
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            
-            [self parserDidFinish:ads];
+            if([self.delegate respondsToSelector:@selector(parserDidFinish:)]){
+                [self.delegate parserDidFinish:ads];
+            }
         }];
-    }
-    else{
-    
-        if([self.delegate respondsToSelector:@selector(parserDidFinish:)]){
-            [self.delegate parserDidFinish:ads];
-        }
     }
 }
 
 -(void)wrapperDidFinish:(NSMutableArray*)ads{
-    int index = [self.ads indexOfObject:self.wrapper];
+    int index = (int)[self.ads indexOfObject:self.wrapper];
     [self.ads removeObject:self.wrapper];
-    //Set the sequence ID to match the wrapper nodes
-    for (VASTAd *ad in ads) {
+    //Set the sequence ID to match the wrapper nodes and insert the nodes starting at the node where the wrapper
+    for (VASTAdPod *ad in ads) {
         ad.sequence = [self.wrapper.sequence copy];
         [self.ads insertObject:ad atIndex:index];
         index++;
