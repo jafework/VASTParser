@@ -19,6 +19,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.progressIndicator.hidesWhenStopped = YES;
+    [self.progressIndicator startAnimating];
+    self.progressLabel.text = @"Parsing Data...";
+    
 	// Do any additional setup after loading the view, typically from a nib.
     
     NSURL *url = [NSURL URLWithString:@"http://share.onescreen.co/homes/slee/fishy.xml"];
@@ -31,6 +35,8 @@
 }
 
 -(void)parserDidFinish:(NSMutableArray*)ads{
+    [self.progressIndicator stopAnimating];
+    self.progressLabel.text = [NSString stringWithFormat:@"%lu Ads Parsed", ads.count];
     NSLog(@"Parser Finished");
     
 }

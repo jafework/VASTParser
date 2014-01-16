@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface VASTViewController : UIViewController
-
+@property (nonatomic, weak) IBOutlet UILabel *progressLabel;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *progressIndicator;
 @end
