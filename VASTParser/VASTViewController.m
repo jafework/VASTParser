@@ -23,12 +23,8 @@
     [self.progressIndicator startAnimating];
     self.progressLabel.text = @"Parsing Data...";
     
-	// Do any additional setup after loading the view, typically from a nib.
-    
-    NSURL *url = [NSURL URLWithString:@"http://share.onescreen.co/homes/slee/fishy.xml"];
-    
-    //NSURL *url = [NSURL URLWithString:@"http://demo.tremorvideo.com/proddev/vast/vast_inline_linear.xml"];
-    //NSURL *url = [NSURL URLWithString:@"http://share.onescreen.co/homes/jafework/bac/2-0_tests/VAST_3_test_wrapper_multi.xml"];
+	// Do any additional setup after loading the view, typically from a nib.    
+    NSURL *url = [NSURL URLWithString:@"http://demo.tremorvideo.com/proddev/vast/vast_inline_linear.xml"];
     self.parser = [[VASTParser alloc] initWithVASTUrl:url];
     self.parser.delegate = self;
     [self.parser start];
